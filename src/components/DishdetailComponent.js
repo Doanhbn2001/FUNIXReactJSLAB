@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, usestate } from "react";
 import {
   Card,
   CardImg,
@@ -7,7 +7,14 @@ import {
   CardTitle,
   Breadcrumb,
   BreadcrumbItem,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  Nav,
+  NavItem,
 } from "reactstrap";
+import { Control, LocalForm, Errors } from "react-redux-form";
 import { Link } from "react-router-dom";
 
 function RenderDish({ dish }) {
@@ -54,6 +61,10 @@ function RenderComments({ comments }) {
 }
 
 const DishDetail = (props) => {
+  const [isModalOpen, setState] = useState(false);
+  const toggleModal = () => {
+    setState(!isModalOpen);
+  };
   if (props.dish != null) {
     return (
       <div className="container">
@@ -76,6 +87,15 @@ const DishDetail = (props) => {
           <RenderDish dish={props.dish} />
           <RenderComments comments={props.comments} />
         </div>
+        <p></p>
+        <Nav className="ml-auto" navbar>
+          <NavItem>
+            <Button outline onClick={this.toggleModal}>
+              <span className="fa fa-sign-in fa-lg"></span> Submit Comment
+            </Button>
+          </NavItem>
+        </Nav>
+        <Modal></Modal>
       </div>
     );
   } else {
