@@ -33,13 +33,11 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    console.log("fff");
     this.props.fetchDishes();
   }
 
   render() {
     const HomePage = () => {
-      console.log(this.props.dishes);
       return (
         <Home
           dish={this.props.dishes.dishes.filter((dish) => dish.featured)[0]}
@@ -77,7 +75,13 @@ class Main extends Component {
           <Route
             exact
             path="/menu"
-            component={() => <Menu dishes={this.props.dishes.dishes} />}
+            component={() => (
+              <Menu
+                dishes={this.props.dishes.dishes}
+                isLoading={this.props.dishes.isLoading}
+                errMess={this.props.dishes.errMess}
+              />
+            )}
           />
           <Route path="/menu/:dishId" component={DishWithId} />
           <Route exact path="/contactus" component={Contact} />
