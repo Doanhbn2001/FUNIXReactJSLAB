@@ -9,7 +9,7 @@ import About from "./AbotUsComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
-  addComment,
+  postComment,
   fetchDishes,
   fetchComments,
   fetchPromos,
@@ -26,8 +26,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDitspatchToProps = (ditspatch) => ({
-  addComment: (dishId, rating, author, comment) =>
-    ditspatch(addComment(dishId, rating, author, comment)),
+  postComment: (dishId, rating, author, comment) =>
+    ditspatch(postComment(dishId, rating, author, comment)),
   fetchDishes: () => {
     ditspatch(fetchDishes());
   },
@@ -87,7 +87,7 @@ class Main extends Component {
             (comment) => comment.dishId === parseInt(match.params.dishId, 10)
           )}
           commentsErrMess={this.props.comments.errMess}
-          addComment={this.props.addComment}
+          postComment={this.props.postComment}
         />
       );
     };
